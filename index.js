@@ -247,7 +247,7 @@ function copy_BETTER(arr) {
 // console.log(copy_BETTER_test1);
 
 
-
+/////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
 /* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. 
   Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. 
 
@@ -289,6 +289,9 @@ function filterByWord(arr, searchStr) {
 
 /* 🧁🍦🍨 STRETCH 🍨🍦🍫*/
 
+
+
+/////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
 /* STRETCH 1: Write a function that returns the average number of words in an array. You should be able to use this function for any array, but can test with originalFlavors.
 
 Your function should accept: 
@@ -299,9 +302,21 @@ and should return the average number of words per item in the array.
 
 For example, getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
 
-function getAverageWordLength(/*code here*/) {
-  /*code here*/
+function getAverageWordLength(arr) {
+  let wordcountSum = 0;
+  for (let i=0; i<arr.length; i++) {
+    let splitElmt = arr[i].split(" ");
+    wordcountSum += splitElmt.length;
+  }
+  return wordcountSum / arr.length;
 }
+// // TEST getAverageWordLength()
+// //WORKS AS EXPECTED
+// const testArr2 = ["This is", "an", "array", "of words that", "are split up differently", "the", "average should", "be", "1.777777777777"];
+// const avgWordTest1 = getAverageWordLength(testArr2);
+// console.log(avgWordTest1);
+// const avgWordTest2 = getAverageWordLength(originalFlavors);
+// console.log(avgWordTest2);
 
 /* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. 
 
