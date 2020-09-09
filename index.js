@@ -232,6 +232,12 @@ function copy(originalArr, newArr) {
 // const testCopy3 = copy(originalNonArray, existingArrayEmpty2);
 // console.log(testCopy3);
 
+// let existingArray = ["el1", "el2", "el3"];
+// let targetArray = [];
+// placeCopyArray = copy(existingArray, targetArray);
+// console.log(existingArray);
+// console.log(targetArray);
+
 function copy_BETTER(arr) {
   // A better copy function since it gets rid of the unuseful second argument of the original function
   if (!Array.isArray(arr)) {
@@ -417,6 +423,11 @@ var regionalFlavors = [
 ];
 
 function getRandomFlavors(arr1, arr2, arr3, arr4) {
+  if (!Array.isArray(arr1) || !Array.isArray(arr2) || !Array.isArray(arr3) || !Array.isArray(arr4)) {
+    console.log("All given parameters must be arrays.");
+    return null;
+  }
+
   const arrAllFlavors = [
     [...arr1],
      [...arr2],
