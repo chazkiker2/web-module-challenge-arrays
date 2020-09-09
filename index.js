@@ -248,7 +248,11 @@ function copy_BETTER(arr) {
 
 
 
-/* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate". This way you could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
+/* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. 
+  Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. 
+
+  Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate". 
+  This way you could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
 
 Your function should accept: 
 
@@ -263,9 +267,25 @@ DO NOT USE ADVANCED ARRAY METHODS (i.e. .filter) to solve this problem.
 
 hint - you can use the .includes method to help you solve this */
 
-function filterByWord(/*code here*/) {
-  /*code here*/
+function filterByWord(arr, searchStr) {
+  let filteredArr = [];
+  for (let i=0; i<arr.length; i++) {
+    if (arr[i].toLowerCase().includes(searchStr.toLowerCase())) {
+      filteredArr.push(arr[i]);
+    }
+  }
+  return filteredArr;
 }
+// // TEST filterByWord function call with regular letter case
+// // WORKS AS EXPECTED
+// const filterTest1 = filterByWord(originalFlavors, "Chocolate");
+// console.log(filterTest1);
+
+// // TEST filterByWord() with varying letter case
+// // WORKS AS EXPECTED
+// const filterTest2 = filterByWord(originalFlavors, "CHOcoLATE");
+// console.log(filterTest2);
+
 
 /* 🧁🍦🍨 STRETCH 🍨🍦🍫*/
 
