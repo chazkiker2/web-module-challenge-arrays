@@ -141,7 +141,7 @@ function getFlavorByIndex(arr, i) {
 // console.log(getFlavorByIndex(originalFlavors, 2));
 getFlavorByIndex(originalFlavors, 2);
 
-
+/////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
 /* Task 5: As corporate wants to add more and more flavors to their lineup, they've realized that they need to remove flavors based on flavor name, 
   as opposed to just arbitrarily removing the first or last flavor. 
   
@@ -167,7 +167,6 @@ function removeFlavorByName(arr, flavor) {
     return null;
   }
 
-  
   if (arr.includes(flavor)) {
     arr.splice(arr.indexOf(flavor), 1);
     return arr;
@@ -175,7 +174,6 @@ function removeFlavorByName(arr, flavor) {
     console.log("The provided flavor is not in the array!");
     return null;
   }
-
 }
 // console.log(is31Flavors(originalFlavors));
 // console.log(is31Flavors(removeFlavorByName(originalFlavors, "Vanilla")));
@@ -185,6 +183,9 @@ function removeFlavorByName(arr, flavor) {
 removeFlavorByName(originalFlavors, "Vanilla");
 
 
+
+
+/////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
 /* Task 6: With all of these changes going on, we don't want to lose track of the actual, original 31 flavors. Write a function called copy that makes a copy of the array. 
 
 Your function should accept: 
@@ -193,9 +194,59 @@ Your function should accept:
 
 and should return a new array that is identical to the old array. You can name the new array however you'd like. */
 
-function copy(/*code here*/) {
-  /*code here*/
+function copy(originalArr, newArr) {
+  if (!Array.isArray(originalArr)) {
+    console.log("originalArr must be an array!");
+    return null;
+  } else if (!Array.isArray(newArr)) {
+    console.log("The newArr must be an array!");
+    return null;
+  }
+
+  if (newArr.length > 0) {
+    // assuming user inputted an array (as the newArr argument) in order to append (concat) the copy of originalArr into newArr
+    console.log(
+      "Creating a copy of new array and concatenating said copy to newArr——if newArr is an existing array with elements inside, the copy will have more than 31 flavors"
+    );
+    return newArr.concat([...originalArr]);
+  } else {
+    // assuming user inputted an empty array (as the newArr argument) in order to copy the original into newArr... in which case the newArr argument is useless
+    return [...originalArr];
+  }
 }
+//test function call where (1) originalArr is an array, (2) newArr is an existing array with elements in it
+// WORKING AS EXPECTED
+// let existingArrayWithElements = ["element1", "element2"];
+// const testCopy1 = copy(testArr1, existingArrayWithElements);
+// console.log(testCopy1);
+
+// test function call where (1) originalArr is an array, (2) newArr is an existing array without any elements (rendering newArr argument useless)
+// WORKING AS EXPECTED
+// let existingArrayEmpty = [];
+// const testCopy2 = copy(testArr1, existingArrayEmpty);
+// console.log(testCopy2);
+
+// test function call where (1) originalArr is not an array at all. The copy function should return null.
+// WORKING AS EXPECTED
+// let existingArrayEmpty2 = [];
+// let originalNonArray = "THIS IS NOT AN ARRAY";
+// const testCopy3 = copy(originalNonArray, existingArrayEmpty2);
+// console.log(testCopy3);
+
+function copy_BETTER(arr) {
+  // A better copy function since it gets rid of the unuseful second argument of the original function
+  if (!Array.isArray(arr)) {
+    console.log("arr is not an array! please provide an array!");
+    return null;
+  }
+  return [...arr];
+}
+// test copy_BETTER function call where arr is an array
+// WORKING SA EXPECTED
+// const copy_BETTER_test1 = copy_BETTER(testArr1);
+// console.log(copy_BETTER_test1);
+
+
 
 /* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate". This way you could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
 
