@@ -168,6 +168,8 @@ function removeFlavorByName(arr, flavor) {
   }
 
   if (arr.includes(flavor)) {
+    const indexToDelete = arr.indexOf(flavor);
+
     arr.splice(arr.indexOf(flavor), 1);
     return arr;
   } else {
@@ -181,9 +183,6 @@ function removeFlavorByName(arr, flavor) {
 
 // console.log(removeFlavorByName(originalFlavors, "Vanilla"));
 removeFlavorByName(originalFlavors, "Vanilla");
-
-
-
 
 /////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
 /* Task 6: With all of these changes going on, we don't want to lose track of the actual, original 31 flavors. Write a function called copy that makes a copy of the array. 
@@ -246,7 +245,6 @@ function copy_BETTER(arr) {
 // const copy_BETTER_test1 = copy_BETTER(testArr1);
 // console.log(copy_BETTER_test1);
 
-
 /////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
 /* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. 
   Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. 
@@ -269,7 +267,7 @@ hint - you can use the .includes method to help you solve this */
 
 function filterByWord(arr, searchStr) {
   let filteredArr = [];
-  for (let i=0; i<arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     if (arr[i].toLowerCase().includes(searchStr.toLowerCase())) {
       filteredArr.push(arr[i]);
     }
@@ -286,10 +284,7 @@ function filterByWord(arr, searchStr) {
 // const filterTest2 = filterByWord(originalFlavors, "CHOcoLATE");
 // console.log(filterTest2);
 
-
 /* 🧁🍦🍨 STRETCH 🍨🍦🍫*/
-
-
 
 /////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
 /* STRETCH 1: Write a function that returns the average number of words in an array. You should be able to use this function for any array, but can test with originalFlavors.
@@ -304,12 +299,13 @@ For example, getAverageWordLength(originalFlavors) should return a number betwee
 
 function getAverageWordLength(arr) {
   let wordcountSum = 0;
-  for (let i=0; i<arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     let splitElmt = arr[i].split(" ");
     wordcountSum += splitElmt.length;
   }
   return wordcountSum / arr.length;
 }
+
 // // TEST getAverageWordLength()
 // //WORKS AS EXPECTED
 // const testArr2 = ["This is", "an", "array", "of words that", "are split up differently", "the", "average should", "be", "1.777777777777"];
@@ -318,6 +314,17 @@ function getAverageWordLength(arr) {
 // const avgWordTest2 = getAverageWordLength(originalFlavors);
 // console.log(avgWordTest2);
 
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
 /* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. 
 
 Write a function that will randomly select a total of 31 flavors from originalFlavors, currentFlavors, seasonalFlavors, and regionalFlavors.
@@ -409,6 +416,45 @@ var regionalFlavors = [
   "Caramel 'n' Cookies",
 ];
 
-function getRandomFlavors(/*code here*/) {
-  /*code here*/
+function getRandomFlavors(arr1, arr2, arr3, arr4) {
+  const arrAllFlavors = [
+    [...arr1],
+     [...arr2],
+      [...arr3],
+       [...arr4]
+  ];
+
+  const arrRandomFlavors = [];
+
+  for (let i=0; i<31; i++) {
+    let added = false;
+    let outerIndex = Math.floor(Math.random() * arrAllFlavors.length);
+    let innerIndex = Math.floor(Math.random() * arrAllFlavors[outerIndex].length);
+
+    while (!added) {
+      let flavorToAdd = arrAllFlavors[outerIndex][innerIndex];
+      if (!arrRandomFlavors.includes(flavorToAdd)) {
+        arrRandomFlavors.push(flavorToAdd);
+        added = true;
+      } else {
+        if (innerIndex < arrAllFlavors[outerIndex].length - 1) {
+          innerIndex++;
+        } else if (outerIndex < arrAllFlavors.length - 1) {
+          innerIndex = 0;
+          outerIndex++;
+        } else {
+          outerIndex = 0;
+        }
+      }
+    }
+    
+  }
+
+  return arrRandomFlavors;
 }
+// // TESTING getRandomFlavors() function call. IT WORKS IT WORKS IT WORKS!!!!
+// const randomArr = getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors);
+// console.log(randomArr);
+// console.log(is31Flavors(randomArr));
+
+
