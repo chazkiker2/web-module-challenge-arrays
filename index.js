@@ -34,7 +34,6 @@ var originalFlavors = [
 
 const testArr1 = ["item1", "item2", "item3", "item4", "item5"];
 
-
 /////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
 /* Task 1: Confirm that the array is exactly 31 flavors. Your function should accept:
 
@@ -58,10 +57,9 @@ function is31Flavors(arr) {
 }
 
 // console.log(
-  is31Flavors(originalFlavors);
+is31Flavors(originalFlavors);
 // );
 // console.log(is31Flavors(testArr1));
-
 
 /////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
 /* Task 2: Corporate has come to you with an idea for a new flavor: Rainbow Sherbert! They think this will be a game changer. You need to modify the array to include this flavor. 
@@ -76,13 +74,20 @@ Your function should add the flavor to the front of the array and console.log th
 For example addFlavor("Rainbow Sherbert", originalFlavors) should return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla Burnt Almond"] */
 
 function addFlavor(arr, flavor) {
+  if (!Array.isArray(arr)) {
+    console.log("inputted array is not an array!");
+    if (typeof flavor !== "string") {
+      console.log("inputted flavor is not a string!");
+    }
+    return null;
+  }
+
   arr.unshift(flavor);
   // console.log(arr);
   return arr;
 }
 addFlavor(originalFlavors, "Rainbow Sherbert");
 // console.log(addFlavor(testArr1, "itemA"));
-
 
 /////////////////////////////////////////////////////////////////         FINISHED         ///////////////////////////////////////////////////////////////////
 /* Task 3: Houston, we have a problem! There are now 32 flavors in the array! Your task is to remove an item from the end of the array. 
@@ -96,6 +101,11 @@ Your function should remove a flavor from the end of the array and console.log t
 For example removeLastFlavor(originalFlavors) would return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla"]*/
 
 function removeLastFlavor(arr) {
+  if (!Array.isArray(arr)) {
+    console.log("must input an array");
+    return null;
+  }
+
   arr.pop();
   // console.log(arr);
   return arr;
@@ -113,20 +123,29 @@ Your function should accept:
 For example, getFlavorByIndex(originalFlavors, 2) would return "Black Walnut", assuming Rainbow Sherbert has been added successfully. */
 
 function getFlavorByIndex(arr, i) {
-  if (  (!isNaN(i))  &&  i < arr.length  )
-    return arr[i];
-  else {
-    console.log("either the array is empty or the provided index was invalid");
-    return undefined;
+  let err = false;
+  if (!Array.isArray(arr)) {
+    console.log("arr is not an array!");
+    err = true;
+  } else if (isNaN(i)) {
+    console.log("index must be a number");
+    err = true;
+  } else if (!(i < arr.length && i >= 0)) {
+    console.log("invalid index provided");
+    err = true;
   }
+  if (err) return null;
+
+  return arr[i];
 }
-// console.log(
-  getFlavorByIndex(originalFlavors, 2);
-// );
+// console.log(getFlavorByIndex(originalFlavors, 2));
+getFlavorByIndex(originalFlavors, 2);
 
 
-
-/* Task 5: As corporate wants to add more and more flavors to their lineup, they've realized that they need to remove flavors based on flavor name, as opposed to just arbitrarily removing the first or last flavor. Your task is to get an index by flavor name, and remove that flavor from the array. 
+/* Task 5: As corporate wants to add more and more flavors to their lineup, they've realized that they need to remove flavors based on flavor name, 
+  as opposed to just arbitrarily removing the first or last flavor. 
+  
+  Your task is to get an index by flavor name, and remove that flavor from the array. 
 
 Your function should accept: 
 
@@ -139,9 +158,32 @@ Hint: You can use .splice() for this
 
 */
 
-function removeFlavorByName(/*code here*/) {
-  /*code here*/
+function removeFlavorByName(arr, flavor) {
+  if (!Array.isArray(arr)) {
+    console.log("arr is not an array!");
+    return null;
+  } else if (typeof flavor !== "string") {
+    console.log("flavor must be a string");
+    return null;
+  }
+
+  
+  if (arr.includes(flavor)) {
+    arr.splice(arr.indexOf(flavor), 1);
+    return arr;
+  } else {
+    console.log("The provided flavor is not in the array!");
+    return null;
+  }
+
 }
+// console.log(is31Flavors(originalFlavors));
+// console.log(is31Flavors(removeFlavorByName(originalFlavors, "Vanilla")));
+// console.log(is31Flavors(originalFlavors));
+
+// console.log(removeFlavorByName(originalFlavors, "Vanilla"));
+removeFlavorByName(originalFlavors, "Vanilla");
+
 
 /* Task 6: With all of these changes going on, we don't want to lose track of the actual, original 31 flavors. Write a function called copy that makes a copy of the array. 
 
